@@ -71,7 +71,7 @@ public class BooksController {
     @GetMapping("/total_price")
     public ResponseEntity getTotalPrice(@RequestParam("books") List<Long> bookIds,
                                         @RequestParam(value = "promotionCode",required = false) String promotionCode) {
-        return ResponseEntity.ok().body("Total price is" + bookService.getTotalPrice(bookIds, promotionCode));
+        return ResponseEntity.ok().body("Total price is " + bookService.getTotalPrice(bookIds, promotionCode));
     }
 
 }
