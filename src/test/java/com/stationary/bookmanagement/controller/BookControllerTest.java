@@ -2,6 +2,8 @@ package com.stationary.bookmanagement.controller;
 
 
 import com.stationary.bookmanagement.BookManagementApplication;
+import com.stationary.bookmanagement.dto.BookDto;
+import com.stationary.bookmanagement.dto.BookTypeEnum;
 import com.stationary.bookmanagement.entity.Book;
 import com.stationary.bookmanagement.repository.BooksRepository;
 import com.stationary.bookmanagement.service.BookService;
@@ -47,6 +49,7 @@ public class BookControllerTest {
         Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
     }
 
+
     @Test
     public void getBookListTest() {
         List<Book> bookDtoList = Arrays.asList(new Book());
@@ -57,10 +60,41 @@ public class BookControllerTest {
     }
 
     @Test
+    public void getBookListTest_WhenNoBookFound() {
+        Mockito.when(bookService.getBooks()).thenReturn(Collections.emptyList());
+        ResponseEntity response = booksController.getBookList();
+        Assertions.assertEquals(response.getBody(), "No Book found");
+
+    }
+
+    @Test
     public void updateBookTest() {
         bookService.update(id,BookTest.getBook());
         ResponseEntity response = booksController.update(id,BookTest.getBook());
         Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
+    }
+
+    @Test
+    public void updateBookTest_When_Id_NotFound() {
+        bookService.update(id,BookTest.getBook());
+        ResponseEntity response = booksController.update(2L,BookTest.getBook());
+        Assertions.assertEquals(response.getBody(), "Book id is not found");
+    }
+
+
+    @Test
+    public void updateBookTestWhenBookIdIsNull() {
+        bookService.update(id,BookTest.getBook());
+        ResponseEntity response = booksController.update(id,BookTest.getBook());
+        Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
+    }
+
+    @Test
+    public void deleteBookTest_When_Id_NotFound() {
+        bookService.delete(id);
+        ResponseEntity response = booksController.delete(2L);
+        Assertions.assertEquals(response.getBody(), "Book id is not found");
+
     }
 
     @Test

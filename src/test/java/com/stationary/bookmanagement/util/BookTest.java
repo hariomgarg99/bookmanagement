@@ -1,6 +1,7 @@
 package com.stationary.bookmanagement.util;
 
 import com.stationary.bookmanagement.dto.BookDto;
+import com.stationary.bookmanagement.dto.BookTypeEnum;
 
 
 public class BookTest {
@@ -13,7 +14,7 @@ public class BookTest {
                 .description("this book is for learn basic java concept")
                 .isbn("134234")
                 .price(105.00)
-                .type("Tech").build();
+                .type(BookTypeEnum.JAVA.name()).build();
         return bookDto;
     }
 }

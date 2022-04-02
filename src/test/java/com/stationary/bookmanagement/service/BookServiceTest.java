@@ -2,6 +2,7 @@ package com.stationary.bookmanagement.service;
 
 import com.stationary.bookmanagement.config.DtoMapperConfig;
 import com.stationary.bookmanagement.dto.BookDto;
+import com.stationary.bookmanagement.dto.BookTypeEnum;
 import com.stationary.bookmanagement.entity.Book;
 import com.stationary.bookmanagement.repository.BooksRepository;
 import com.stationary.bookmanagement.util.BookTest;
@@ -40,8 +41,8 @@ public class BookServiceTest {
     @Test
     public void testAddNewBook() {
         BookDto bookDto = BookTest.getBook();
-        Book book = new Book(1L,"JAVA","Hariom","this book is for learn basic java concept",
-                "Tech",78.4,"134234");
+        Book book = new Book(1L,BookTypeEnum.JAVA.name(),"Hariom","this book is for learn basic java concept",
+                BookTypeEnum.JAVA.name(),78.4,"134234");
         Mockito.when(dtoMapperConfig.modelMapper()).thenReturn(modelMapper);
         Mockito.when(bookRepository.findById(id)).thenReturn(Optional.empty());
         Mockito.when(bookRepository.save(book)).thenReturn(book);
@@ -52,7 +53,7 @@ public class BookServiceTest {
 
     @Test
     public void testGetAllBooks() {
-        Book book = new Book(1L,"JAVA","Hariom","this book is for learn basic java concept",
+        Book book = new Book(1L,BookTypeEnum.JAVA.name(),"Hariom","this book is for learn basic java concept",
                 "Tech",78.4,"134234");
         List<Book> bookList = new ArrayList<>();
         bookList.add(book);
@@ -67,11 +68,11 @@ public class BookServiceTest {
     @Test
     public void testUpdateBook() {
         BookDto bookDto = BookTest.getBook();
-        Book book = new Book(1L,"JAVA","Hariom","this book is for learn basic java concept",
+        Book book = new Book(1L,BookTypeEnum.JAVA.name(),"Hariom","this book is for learn basic java concept",
                 "Tech",78.4,"134234");
         Mockito.when(dtoMapperConfig.modelMapper()).thenReturn(modelMapper);
         Mockito.when(dtoMapperConfig.modelMapper().map(bookDto, Book.class)).thenReturn(book);
-        Book book1 = new Book(1L,"JAVA","Hariom","this book is for learn basic java concept",
+        Book book1 = new Book(1L,BookTypeEnum.JAVA.name(),"Hariom","this book is for learn basic java concept",
                 "Tech",78.4,"134234");
         Mockito.when(bookRepository.findById(id)).thenReturn(Optional.of(book1));
         bookRepository.save(book);
@@ -81,7 +82,7 @@ public class BookServiceTest {
 
     @Test
     public void testDeleteBook() {
-        Book book = new Book(1L,"JAVA","Hariom","this book is for learn basic java concept",
+        Book book = new Book(1L,BookTypeEnum.JAVA.name(),"Hariom","this book is for learn basic java concept",
                 "Tech",89.5,"134234");
         Mockito.when(bookRepository.findById(id)).thenReturn(Optional.of(book));
         bookRepository.deleteById(id);
@@ -90,9 +91,9 @@ public class BookServiceTest {
     }
 
     @Test void getTotalPriceTestWithDiscount(){
-        Book book = new Book(1L,"JAVA","Hariom","this book is for learn basic java concept",
+        Book book = new Book(1L,BookTypeEnum.JAVA.name(),"Hariom","this book is for learn basic java concept",
                 "FICTION",60.0,"134234");
-        Book book1 = new Book(1L,"JAVA","Hariom","this book is for learn basic java concept",
+        Book book1 = new Book(1L,BookTypeEnum.JAVA.name(),"Hariom","this book is for learn basic java concept",
                 "JAVA",90.0,"134234");
         List<Long> bookIdsList = Arrays.asList(1L,2L,4L);
         Mockito.when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
@@ -102,9 +103,9 @@ public class BookServiceTest {
     }
 
     @Test void getTotalPriceTestWithoutDiscount(){
-        Book book = new Book(1L,"JAVA","Hariom","this book is for learn basic java concept",
+        Book book = new Book(1L,BookTypeEnum.JAVA.name(),"Hariom","this book is for learn basic java concept",
                 "FICTION",60.0,"134234");
-        Book book1 = new Book(1L,"JAVA","Hariom","this book is for learn basic java concept",
+        Book book1 = new Book(1L,BookTypeEnum.JAVA.name(),"Hariom","this book is for learn basic java concept",
                 "JAVA",90.0,"134234");
         List<Long> bookIdsList = Arrays.asList(1L,2L,4L);
         Mockito.when(bookRepository.findById(1L)).thenReturn(Optional.of(book));

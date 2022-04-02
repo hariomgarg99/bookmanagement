@@ -1,14 +1,25 @@
 package com.stationary.bookmanagement.dto;
 
 
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class BookDto {
 
     private Long id;
+    @NotEmpty(message = "name must not be empty")
     private String name;
+    @Size(min = 20,max = 100)
+    @NotEmpty(message = "description name must not be empty")
     private String description;
+    @NotEmpty(message = "author name must not be empty")
     private String author;
+    @NotEmpty(message = "type must not be empty")
     private String type;
     private Double price;
+    @NotEmpty(message = "isbn must not be empty")
+    @Size(min = 5,max = 5)
     private String isbn;
 
     private BookDto(BookDtoBuilder bookDtoBuilder){
